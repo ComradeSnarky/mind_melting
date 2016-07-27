@@ -1,6 +1,6 @@
 var Predator = (function () {
   var carnivores = [];
-
+  var herbivores = [];
   return {
     loadCarnivores: function (callbackToInvoke) {
       var loader = new XMLHttpRequest();
