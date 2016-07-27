@@ -1,25 +1,25 @@
 var Predator = (function () {
-  var carnivores = [];
-  var herbivores = [];
+  var carnivores = []
+  var herbivores = []
   return {
     getCarnivores: function (callbackToInvoke) {
       var xhr = new XMLHttpRequest()
         xhr.open('GET', 'carnivores.json')
-        xhr.addEventListener('load', function(){
-          carnivores = JSON.parse(xhr.responseText) //store it in private var (from private array in iife)
+        xhr.addEventListener('load', function(evt){
+          carnivores = JSON.parse(evt.target.responseText) //store it in private var (from private array in iife)
+          //JSON.parse takes strings that look like arrays and turns them into array
+          callbackToInvoke(carnivores) //execute callbacks
         })
         xhr.send()
-
-      callbackToInvoke(carnivores) //execute callbacks
     },
     getHerbivores: function(callbackToInvoke) {
       var xhr = new XMLHttpRequest()
         xhr.open('GET', 'herbivores.json')
-        xhr.addEventListener('load', function(){
-          herbivores = JSON.parse(xhr.responseText)
+        xhr.addEventListener('load', function(evt){
+          herbivores = JSON.parse(evt.target.responseText)
+          callbackToInvoke(herbivores)
         })
         xhr.send()
-      callbackToInvoke(herbivores)
     }
   }
 })();
