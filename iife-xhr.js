@@ -3,8 +3,8 @@ function showCarnivores (carnivores) {
 
 }
 
-function showHerbivores () {
+function showHerbivores (herbivores) {
 
 }
 
-Predator.loadCarnivores(showCarnivores);
+Predator.getCarnivores(showCarnivores);

@@ -2,18 +2,24 @@ var Predator = (function () {
   var carnivores = [];
   var herbivores = [];
   return {
-    loadCarnivores: function (callbackToInvoke) {
-      var loader = new XMLHttpRequest();
+    getCarnivores: function (callbackToInvoke) {
+      var xhr = new XMLHttpRequest()
+        xhr.open('GET', 'carnivores.json')
+        xhr.addEventListener('load', function(){
+          carnivores = JSON.parse(xhr.responseText) //store it in private var (from private array in iife)
+        })
+        xhr.send()
 
-      loader.addEventListener("load", function () {
-        // Set the value of the private array
-        carnivores = JSON.parse(this.responseText);
-
-        // Invoke the callback function so that the caller knows
-        // that the process is complete. Make sure to pass the
-        // carnivore array as an argument.
-
-      });
+      callbackToInvoke(carnivores) //execute callbacks
+    },
+    getHerbivores: function(callbackToInvoke) {
+      var xhr = new XMLHttpRequest()
+        xhr.open('GET', 'herbivores.json')
+        xhr.addEventListener('load', function(){
+          herbivores = JSON.parse(xhr.responseText)
+        })
+        xhr.send()
+      callbackToInvoke(herbivores)
     }
   }
 })();
